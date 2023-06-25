@@ -8,6 +8,8 @@ import random
 import numpy as np
 import pyttsx3
 chatStr = ""
+
+
 # https://youtu.be/Z3ZAJoi4x6Q
 def chat(query):
     global chatStr
@@ -16,7 +18,7 @@ def chat(query):
     chatStr += f"Ridhi: {query}\n Jarvis: "
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt= chatStr,
+        prompt=chatStr,
         temperature=0.7,
         max_tokens=256,
         top_p=1,
@@ -49,13 +51,15 @@ def ai(prompt):
         os.mkdir("Openai")
 
     # with open(f"Openai/prompt- {random.randint(1, 2343434356)}", "w") as f:
-    with open(f"Openai/{''.join(prompt.split('intelligence')[1:]).strip() }.txt", "w") as f:
+    with open(f"Openai/{''.join(prompt.split('intelligence')[1:]).strip()}.txt", "w") as f:
         f.write(text)
+
 
 def say(text):
     engine = pyttsx3.init()
     engine.say(text)
     engine.runAndWait()
+
 
 def takeCommand():
     r = sr.Recognizer()
@@ -70,6 +74,7 @@ def takeCommand():
         except Exception as e:
             return "Some Error Occurred. Sorry from Jarvis"
 
+
 if __name__ == '__main__':
     print('Welcome to Jarvis A.I')
     say("Jarvis A.I")
@@ -77,10 +82,11 @@ if __name__ == '__main__':
         print("Listening...")
         query = takeCommand()
         # todo: Add more sites
-        sites = [["youtube", "https://www.youtube.com"], ["wikipedia", "https://www.wikipedia.com"], ["google", "https://www.google.com"],]
+        sites = [["youtube", "https://www.youtube.com"], ["wikipedia", "https://www.wikipedia.com"],
+                 ["google", "https://www.google.com"]]
         for site in sites:
             if f"Open {site[0]}".lower() in query.lower():
-                say(f"Opening {site[0]} sir...")
+                say(f"Opening {site[0]} Mam...")
                 webbrowser.open(site[1])
         # todo: Add a feature to play a specific song
         if "open music" in query:
@@ -93,11 +99,11 @@ if __name__ == '__main__':
             min = datetime.datetime.now().strftime("%M")
             say(f"Sir time is {hour} {min} minutes")
 
-        elif "open facetime".lower() in query.lower():
-            os.startfile(r"C:\Program Files (x86)\Microsoft Visual Studio.exe")
+        elif "open Visual Studio".lower() in query.lower():
+            os.startfile(r"C:\Users\ACER\OneDrive\Desktop\Visual Studio Code")
 
-        elif "open pass".lower() in query.lower():
-            os.startfile(r"C:\Program Files (x86)\Dev-Cpp.exe")
+        elif "open Dev".lower() in query.lower():
+            os.startfile(r"C:\Users\ACER\OneDrive\Desktop\Dev-C++")
 
         elif "Using artificial intelligence".lower() in query.lower():
             ai(prompt=query)
@@ -110,4 +116,4 @@ if __name__ == '__main__':
 
         else:
             print("Chatting...")
-            chat(query)
+            # chat(query)
